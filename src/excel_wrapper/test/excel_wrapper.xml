@@ -1,0 +1,9 @@
+<?xml version = "1.0"?>
+<Variables>
+    <Variable name="x" type="Int" iotype="in" value="1" desc="integer x"/>
+    <Variable name="s" type="Str" iotype="in" value="Hello World!"/>
+    <Variable name="b" type="Bool" iotype="in" value="False" desc="boolean b"/>
+    <Variable name="y" type="Float" iotype="out" desc="float y"/>
+    <Variable name="bout" type="Bool" iotype="out" desc="boolean bout"/>
+    <Variable name="sout" type="Str" iotype="out" desc="string sout"/>
+</Variables>

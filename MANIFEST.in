@@ -1,0 +1,5 @@
+
+
+graft src/excel_wrapper/sphinx_build/html
+recursive-include src/excel_wrapper/test *.py
+

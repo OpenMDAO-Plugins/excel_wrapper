@@ -1,0 +1,2 @@
+[openmdao.component]
+excel_wrapper.excel_wrapper.ExcelWrapper=excel_wrapper.excel_wrapper:ExcelWrapper
