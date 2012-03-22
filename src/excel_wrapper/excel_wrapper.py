@@ -7,38 +7,57 @@ from xml.etree import ElementTree as ET
 class ExcelWrapper(Component):
     """ An Excel Wrapper """
 
-    xmlFile = "excel_wrapper.xml"
-    try:
-        tree = ET.parse(xmlFile)
-    except:
-        if not os.path.exists(xmlFile):
-            print 'Cannot find the xml file at ' + xmlFile
-    
-    variables = tree.findall("Variable")
-    for v in variables:
-        name = v.attrib['name']
-        kwargs = dict([(key, v.attrib[key]) for key in ('iotype', 'desc', 'units') if key in v.attrib])
-        if v.attrib['iotype'] == 'in':
-            if v.attrib['type'] == 'Float':
-                vars()[name] = Float(float(v.attrib['value']), **kwargs)
-            elif v.attrib['type'] == 'Int':
-                vars()[name] = Int(int(v.attrib['value']), **kwargs)
-            elif v.attrib['type'] == 'Bool':
-                vars()[name] = Bool(v.attrib['value'], **kwargs)
-            elif v.attrib['type'] == 'Str':
-                vars()[name] = Str(v.attrib['value'], **kwargs)
-        else:
-            if v.attrib['type'] == 'Float':
-                vars()[name] = Float(**kwargs)
-            elif v.attrib['type'] == 'Int':
-                vars()[name] = Int(**kwargs)
-            elif v.attrib['type'] == 'Bool':
-                vars()[name] = Bool(**kwargs)
-            elif v.attrib['type'] == 'Str':
-                vars()[name] = Str(**kwargs)
-
-    def __init__(self, excelFile):
+    def __init__(self, excelFile, xmlFile):
         super(ExcelWrapper, self).__init__()
+
+        self.xmlFile = xmlFile
+        try:
+            tree = ET.parse(self.xmlFile)
+        except:
+            if not os.path.exists(self.xmlFile):
+                print 'Cannot find the xml file at ' + self.xmlFile
+        
+        self.variables = tree.findall("Variable")
+        for v in self.variables:
+            name = v.attrib['name']
+            kwargs = dict([(key, v.attrib[key]) for key in ('iotype', 'desc', 'units') if key in v.attrib])
+            if v.attrib['iotype'] == 'in':
+                if v.attrib['type'] == 'Float':
+                    self.add(v.attrib['name'], Float(float(v.attrib['value']), **kwargs))
+                elif v.attrib['type'] == 'Int':
+                    self.add(v.attrib['name'], Int(int(v.attrib['value']), **kwargs))
+                elif v.attrib['type'] == 'Bool':
+                    self.add(v.attrib['name'], Bool(v.attrib['value'], **kwargs))
+                elif v.attrib['type'] == 'Str':
+                    self.add(v.attrib['name'], Str(v.attrib['value'], **kwargs))
+            else:
+                if v.attrib['type'] == 'Float':
+                    self.add(v.attrib['name'], Float(**kwargs))
+                elif v.attrib['type'] == 'Int':
+                    self.add(v.attrib['name'], Int(**kwargs))
+                elif v.attrib['type'] == 'Bool':
+                    self.add(v.attrib['name'], Bool(**kwargs))
+                elif v.attrib['type'] == 'Str':
+                    self.add(v.attrib['name'], Str(**kwargs))
+            # if v.attrib['iotype'] == 'in':
+                # if v.attrib['type'] == 'Float':
+                    # vars()[name] = Float(float(v.attrib['value']), **kwargs)
+                # elif v.attrib['type'] == 'Int':
+                    # vars()[name] = Int(int(v.attrib['value']), **kwargs)
+                # elif v.attrib['type'] == 'Bool':
+                    # vars()[name] = Bool(v.attrib['value'], **kwargs)
+                # elif v.attrib['type'] == 'Str':
+                    # vars()[name] = Str(v.attrib['value'], **kwargs)
+            # else:
+                # if v.attrib['type'] == 'Float':
+                    # vars()[name] = Float(**kwargs)
+                # elif v.attrib['type'] == 'Int':
+                    # vars()[name] = Int(**kwargs)
+                # elif v.attrib['type'] == 'Bool':
+                    # vars()[name] = Bool(**kwargs)
+                # elif v.attrib['type'] == 'Str':
+                    # vars()[name] = Str(**kwargs)
+        
         self.excelFile = excelFile
         self.xlInstance = None
         self.workbook = None
@@ -114,7 +133,8 @@ class ExcelWrapper(Component):
 
 if __name__ == '__main__':
     excelFile = r"C:\META Software\tool\excel_wrapper_test.xlsx"
-    ew = ExcelWrapper(excelFile)
+    xmlFile = 'excel_wrapper.xml'
+    ew = ExcelWrapper(excelFile, xmlFile)
     ew.execute()
     print ew.x, ew.y, ew.b, ew.bout, ew.s, ew.sout
     del(ew)

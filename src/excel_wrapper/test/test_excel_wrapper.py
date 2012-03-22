@@ -13,11 +13,12 @@ class ExcelWrapperTestCase(unittest.TestCase):
         
     def test_ExcelWrapper(self):
         excelFile = r"excel_wrapper_test.xlsx"
-        ew = ExcelWrapper(excelFile)
+        xmlFile = r"excel_wrapper_test.xml"
+        ew = ExcelWrapper(excelFile, xmlFile)
         ew.execute()
-        print '%f = 2.12345*%i' %(ew.y, ew.x)
-        print '%s = ~%s' %(ew.bout, ew.b)
-        print '%s = lower(%s)' %(ew.sout, ew.s) 
+        print '2.12345*%i = %f' %(ew.x, ew.y)
+        print '~%s = %s' %(ew.b, ew.bout)
+        print 'lower(%s) = %s' %(ew.s, ew.sout) 
         del(ew)
         os._exit(1)
         
