@@ -6,7 +6,6 @@ import logging
 import os
 
 from openmdao.util.testutil import assert_raises, assert_rel_error
-from excel_wrapper.excel_wrapper import ExcelWrapper
 
 class ExcelWrapperTestCase(unittest.TestCase):
 
@@ -17,14 +16,13 @@ class ExcelWrapperTestCase(unittest.TestCase):
             raise nose.SkipTest('Currently, excel_wrapper works only on Windows.')
         
     def tearDown(self):
-        for pattern in ('*.log'):
-            for name in glob.glob(pattern):
-                os.remove(name)
+        pass
         
     def test_ExcelWrapper(self):
         logging.debug('')
         logging.debug('test_ExcelWrapper')
 
+        from excel_wrapper.excel_wrapper import ExcelWrapper
         excelFile = r"excel_wrapper_test.xlsx"
         xmlFile = r"excel_wrapper_test.xml"
         ew = ExcelWrapper(excelFile, xmlFile)
