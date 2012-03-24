@@ -2,6 +2,7 @@ from openmdao.main.api import Component
 from openmdao.lib.datatypes.api import Float, Int, Bool, Str
 import os
 import win32com.client
+import ast
 from xml.etree import ElementTree as ET
 
 class ExcelWrapper(Component):
@@ -27,7 +28,7 @@ class ExcelWrapper(Component):
                 elif v.attrib['type'] == 'Int':
                     self.add(v.attrib['name'], Int(int(v.attrib['value']), **kwargs))
                 elif v.attrib['type'] == 'Bool':
-                    self.add(v.attrib['name'], Bool(v.attrib['value'], **kwargs))
+                    self.add(v.attrib['name'], Bool(ast.literal_eval(v.attrib['value']), **kwargs))
                 elif v.attrib['type'] == 'Str':
                     self.add(v.attrib['name'], Str(v.attrib['value'], **kwargs))
             else:
@@ -39,24 +40,6 @@ class ExcelWrapper(Component):
                     self.add(v.attrib['name'], Bool(**kwargs))
                 elif v.attrib['type'] == 'Str':
                     self.add(v.attrib['name'], Str(**kwargs))
-            # if v.attrib['iotype'] == 'in':
-                # if v.attrib['type'] == 'Float':
-                    # vars()[name] = Float(float(v.attrib['value']), **kwargs)
-                # elif v.attrib['type'] == 'Int':
-                    # vars()[name] = Int(int(v.attrib['value']), **kwargs)
-                # elif v.attrib['type'] == 'Bool':
-                    # vars()[name] = Bool(v.attrib['value'], **kwargs)
-                # elif v.attrib['type'] == 'Str':
-                    # vars()[name] = Str(v.attrib['value'], **kwargs)
-            # else:
-                # if v.attrib['type'] == 'Float':
-                    # vars()[name] = Float(**kwargs)
-                # elif v.attrib['type'] == 'Int':
-                    # vars()[name] = Int(**kwargs)
-                # elif v.attrib['type'] == 'Bool':
-                    # vars()[name] = Bool(**kwargs)
-                # elif v.attrib['type'] == 'Str':
-                    # vars()[name] = Str(**kwargs)
         
         self.excelFile = excelFile
         self.xlInstance = None
@@ -132,11 +115,13 @@ class ExcelWrapper(Component):
 # End ExcelWrapper class
 
 if __name__ == '__main__':
-    excelFile = r"C:\META Software\tool\excel_wrapper_test.xlsx"
-    xmlFile = 'excel_wrapper.xml'
+    excelFile = r"test/excel_wrapper_test.xlsx"
+    xmlFile = r"test/excel_wrapper_test.xml"
     ew = ExcelWrapper(excelFile, xmlFile)
     ew.execute()
-    print ew.x, ew.y, ew.b, ew.bout, ew.s, ew.sout
+    print '2.12345*%i = %f' %(ew.x, ew.y)
+    print '~%s = %s' %(ew.b, ew.bout)
+    print 'lower(%s) = %s' %(ew.s, ew.sout) 
     del(ew)
     os._exit(1)
 # End excel_wrapper.py
