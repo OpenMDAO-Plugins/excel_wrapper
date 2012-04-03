@@ -14,6 +14,8 @@ Package Metadata
 
 - **entry_points**:: 
 
+    [openmdao.container]
+    excel_wrapper.excel_wrapper.ExcelWrapper=excel_wrapper.excel_wrapper:ExcelWrapper
     [openmdao.component]
     excel_wrapper.excel_wrapper.ExcelWrapper=excel_wrapper.excel_wrapper:ExcelWrapper
 

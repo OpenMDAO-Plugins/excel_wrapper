@@ -4,9 +4,9 @@ Usage Guide
 ===========
 
 Using excel_wrapper
-========================================
+=========================
 
-Let's say we want to implement the following equations in Excel and wrap into OpenMDAO.
+Let's say we want to implement the following equations in Excel and wrap into OpenMDAO
 
 .. testcode:: equations
 
@@ -14,10 +14,10 @@ Let's say we want to implement the following equations in Excel and wrap into Op
     bout = ~b
     sout = lower(s)
 
-where x is an integer, y is a float, b and bout are booleans, and s and sout are strings. Create a new Excel file and
-define the following names: x, y, b, bout, s, and sout.
+where `x` is an integer, `y` is a float, `b` and `bout` are booleans, and `s` and `sout` are
+strings. Create a new Excel file and define the following names: ``x, y, b, bout, s,`` and ``sout``.
 
-Specify the attributes of the variables in an xml file as follows:
+Specify the attributes of the variables in an XML file as follows:
 
 .. testcode:: xml
 
@@ -33,7 +33,7 @@ Specify the attributes of the variables in an xml file as follows:
 
 Please note that the inputs should be followed by the outputs and that units and desc are optional.
 
-Here is a python code that calls the wrapper and prints out the result.
+Here is Python code that calls the wrapper and prints out the result.
 
 .. testcode:: excel_wrapper_parts
 
@@ -50,4 +50,5 @@ Here is a python code that calls the wrapper and prints out the result.
     del(ew)
     os._exit(1)
     
-Place the excel file and the xml in the same directory as the above python code or specify the full parhs of the files.
+Place the Excel file and the XML in the same directory as the above Python code or specify the full
+paths of the files.
