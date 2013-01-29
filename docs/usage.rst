@@ -6,7 +6,7 @@ Usage Guide
 Using excel_wrapper
 =========================
 
-Let's say we want to implement the following equations in Excel and wrap into OpenMDAO
+To begin, let's say we want to implement the following equations in Excel and wrap into OpenMDAO
 
 .. testcode:: equations
 
