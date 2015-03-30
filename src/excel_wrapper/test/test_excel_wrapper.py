@@ -23,8 +23,17 @@ class ExcelWrapperTestCase(unittest.TestCase):
         logging.debug('test_ExcelWrapper')
 
         from excel_wrapper.excel_wrapper import ExcelWrapper
-        excelFile = r"excel_wrapper_test.xlsx"
-        xmlFile = r"excel_wrapper_test.xml"
+        test_root = os.path.abspath(os.path.dirname(__file__))
+        excelFile = os.path.join(
+            test_root,
+            "excel_wrapper_test.xlsx"
+        )
+
+        xmlFile = os.path.join(
+            test_root,
+            "excel_wrapper_test.xml"
+        )
+
         ew = ExcelWrapper(excelFile, xmlFile)
         ew.execute()
         assert_rel_error(self, ew.y, 2.12345, 0.0001)
